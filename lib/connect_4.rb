@@ -94,7 +94,7 @@ class Game
 
   def play_again?
     puts "Total #{@player1.name} wins: #{@player1.wins}"
-    puts "total #{@player2.name} wins: #{@player2.wins}"
+    puts "Total #{@player2.name} wins: #{@player2.wins}"
     puts 'Play again? Enter Y/N:'
     answer = gets.chomp.upcase
     until answer == 'Y' || answer == 'N'
