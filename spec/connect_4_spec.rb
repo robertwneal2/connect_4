@@ -5,7 +5,7 @@ describe Board do
   # #set_val and #get_val too simple to need to test. #display does not need to be tested since it just puts values
 
   describe '#reset' do
-    subject(:board_clear) { described_class.new}
+    subject(:board_clear) { described_class.new }
 
     it 'resets the board' do
       row = 0
@@ -237,5 +237,66 @@ describe Board do
 end
 
 describe Game do
+
+  describe '#get_move' do
+    subject(:game_get_move) { described_class.new }
+
+    it 'returns a move from player input' do
+
+    end
+
+  end
+
+  describe '#valid_move?' do
+    subject(:game_valid_move) { described_class.new }
+
+    it 'returns true if move valid' do
+      move = '3'
+      result = game_valid_move.send(:valid_move?, move)
+      expect(result).to be_truthy
+    end
+
+    it 'returns false if move not a number' do
+      move = 'a'
+      result = game_valid_move.send(:valid_move?, move)
+      expect(result).to be_falsy
+    end
+
+    it 'returns false if move greater than 6' do
+      move = '7'
+      result = game_valid_move.send(:valid_move?, move)
+      expect(result).to be_falsy
+    end
+
+    it 'returns false if move less than 0' do
+      move = '-1'
+      result = game_valid_move.send(:valid_move?, move)
+      expect(result).to be_falsy
+    end
+
+    it 'returns false if col full' do
+      6.times { game_valid_move.send(:make_move, 4, 'B') }
+      result = game_valid_move.send(:valid_move?, '4')
+      expect(result).to be_falsy
+    end
+
+  end
+
+  describe '#switch_turns' do
+    subject(:game_switch) { described_class.new }
+
+    it 'switches from player2 to player1' do
+      player2 = game_switch.instance_variable_get(:@player2) 
+      player1 = game_switch.instance_variable_get(:@player1) 
+      result = game_switch.send(:switch_turns, player2)
+      expect(result).to eq(player1)
+    end
+  end
+
+end
+
+describe Player do
+
+  # No tests needed
 
 end
